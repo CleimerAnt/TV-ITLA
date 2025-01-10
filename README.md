@@ -30,7 +30,7 @@ Este es un proyecto desarrollado en **.NET** utilizando una arquitectura en capa
    ```bash
    docker-compose up
 
-   ## Enlaces:
+ ## Enlaces:
 
 - [Repositorio en Docker Hub](https://hub.docker.com/r/cleimer24/tv-itla/tags)
 
