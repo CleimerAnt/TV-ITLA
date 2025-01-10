@@ -29,3 +29,8 @@ Este es un proyecto desarrollado en **.NET** utilizando una arquitectura en capa
 3. Ejecuta el siguiente comando para levantar los servicios:
    ```bash
    docker-compose up
+
+   ## Enlaces:
+
+- [Repositorio en Docker Hub](https://hub.docker.com/r/cleimer24/tv-itla/tags)
+
