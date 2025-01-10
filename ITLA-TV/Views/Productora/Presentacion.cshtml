@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Application.ViewModel.ProductoraViewModel>
+@{
+    ViewData["Title"] = "Presentacion";
+}
+
+@foreach(var productora in Model)
+{
+    <p>@productora.NombreProductora</p>
+
+    <a asp-action="Editar" asp-controller="Productora" asp-route-Id="@productora.Id" >Editar</a>
+
+    <a asp-action="Eliminar" asp-controller="Productora" asp-route-Id="@productora.Id">Eliminar</a>
+}

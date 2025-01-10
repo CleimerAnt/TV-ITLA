@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Application.ViewModel.GenerosViewModel>
+@{
+    ViewData["Title"] = "Acciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<main class="container mt-5" style="margin-bottom:200px ;">
+    <div class="d-flex align-content-center p-3">
+        <a asp-controller="Genero" asp-action="Create" class="btn btn-primary fw-bold ">Crear Genero</a>
+    </div>
+    <div class="container">
+        <div class="row g-4">
+            @foreach (var genero in Model)
+            {
+            <div class="col-3">
+                <div class="serie">
+                    <div class="titulo__productora  p-5">
+                        <h2 class="text-center text-black">@genero.NombreGenero</h2>
+                    </div>
+
+                    <div class="acciones__Serie d-flex justify-content-end p-2 mt-4" style="gap: 20px;">
+                        <form asp-controller="Productora">
+                                <a asp-controller="Genero" asp-action="Editar" asp-route-Id="@genero.Id" class="btn btn-primary ">Editar</a>
+                                <a asp-controller="Genero" asp-action="Eliminar" asp-route-Id="@genero.Id" class="btn btn-danger">Eliminar</a>
+                        </form>
+                       
+                    </div>
+
+
+
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+
+</main>
+

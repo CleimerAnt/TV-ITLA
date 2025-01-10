@@ -1,0 +1,182 @@
+﻿ @model IEnumerable<Application.ViewModel.SeriesViewModel>
+@{
+    ViewData["Title"] = "Presentacion";
+    Layout = null;
+    var generos = ViewBag.generos as List<Application.ViewModel.GenerosViewModel>;
+    var productoras = ViewBag.productoras as List<Application.ViewModel.ProductoraViewModel>;
+
+    var busqueda = ViewBag.mandar;
+
+    var modelo = busqueda ?? Model;
+
+}
+<!--Utilice JavaScript en el índice para ver la serie.
+    Debes pasar el ratón por la imagen para que aparezca el botón de detalle.
+-->
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/estilo.css" asp-append-version="true" />
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap"
+          rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="container cabezera mt-3">
+        <section>
+            <h1 class="titulo">itla tv</h1>
+        </section>
+
+        <nav class="navegacion">
+            <ul class="lista__navegacion">
+                <li class="nav-item">
+                    <a class="" asp-area="" asp-controller="Series" asp-action="Index">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="" asp-area="" asp-controller="Series" asp-action="Acciones">Series</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="" asp-area="" asp-controller="Productora" asp-action="Acciones">Productora</a>
+                </li>
+                <li class="nav-item">
+                    <a class="" asp-area="" asp-controller="Genero" asp-action="Acciones">Genero</a>
+                </li>
+
+
+            </ul>
+        </nav>
+        <form asp-controller="Series" asp-action="Index" method="post">
+            @if (productoras is not null)
+            {
+                <section class="select">
+
+                    <select style="color: white;" name="productora" id="">
+                        @foreach (var productora in productoras)
+                        {
+                            <option value="@productora.Id">
+                                @productora.NombreProductora
+                            </option>
+                        }
+
+                    </select>
+                    <button type="submit">Buscar</button>
+                </section>
+            }
+
+        </form>
+
+
+        <form asp-controller="Series" asp-action="Index" method="post">
+            @if (generos is not null)
+            {
+                <section class="select">
+                    <select style="color: white;" name="genero">
+                        @foreach (var genero in generos)
+                        {
+                            <option value="@genero.Id">
+                                @genero.NombreGenero
+                            </option>
+                        }
+
+                    </select>
+                    <button>Buscar</button>
+                </section>
+            }
+        </form>
+
+
+
+
+        <!--Para ver este input, debe presionar el botón.-->
+
+        <form asp-controller="Series" asp-action="Index" method="post">
+            <section>
+                <svg class="boton-busqueda" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#f7f7f7" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" /></svg>
+
+                <input name="series" type="text" placeholder="Peliculas,series" class="barra-busqueda none" />
+
+            </section>
+        </form>
+
+
+
+    </header>
+
+
+    <section class="container-fluid sub-main">
+        <div class="container serie__submain">
+
+            <a asp-route-Id="0" asp-controller="Series" asp-action="VerSerie" class="btn btn-secondary boton__black--mirror">Reproducir </a>
+
+        </div>
+    </section>
+
+
+
+    <main class="container" style="margin-top:500px; margin-bottom:100px;">
+        <div class="container">
+            <div class="row g-4">
+                @foreach (var series in modelo)
+                {
+                    <div class="col-3">
+                        <div class="serie">
+                            <img class="imagen__serie" src="@series.ImagenPortada" alt="">
+                            <div class="detalles__serie none">
+                                <h3 class=" mt-2">@series.NombreSerie</h3>
+
+                                <p class="mt-3 text__genero">
+
+                                    <span style="font-weight: bold;">Genero:</span>
+
+
+                                @series.GeneroNombre @series.GeneroSecundario 
+
+                                
+
+                                </p>
+                                <p class="text__genero"><span style="font-weight: bold;">Productora:</span> @series.ProductoraNombre</p>
+
+                                <div class=" d-flex align-content-end justify-content-xl-end">
+                                    <a asp-route-Id="@series.Id" asp-controller="Series" asp-action="VerSerie" class="  btn btn-danger">Detalle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+
+    </main>
+
+
+
+
+    <footer class="container-fluid mt-5 footer">
+        <h2 class="mt-3">Created By Cleimer ANT</h2>
+        <p class="mt-3">Proyecto desarrollado para la asignatura de Programación 3. <br>  Es un modelo de la aplicación de Netflix. <br> Funciona como un reproductor de vídeos y tiene todas las operaciones CRUD.</p>
+
+        <p style="width: 30px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#fafafa" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" /></svg></p>
+    </footer>
+
+
+
+    <script src="~/js/app.js" asp-append-version="true"></script>
+</body>
+</html>

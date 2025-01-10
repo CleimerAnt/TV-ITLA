@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Application.ViewModel.ProductoraViewModel>
+@{
+    ViewData["Title"] = "Acciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="container mt-5" style="margin-bottom:200px ;">
+    <div class="d-flex align-content-center p-3">
+        <a asp-controller="Productora" asp-action="Create" class="btn btn-primary fw-bold">Crear Productora</a>
+    </div>
+    <div class="container">
+        <div class="row g-4">
+            @foreach (var productora in Model)
+            {
+            <div class="col-3">
+                <div class="serie">
+                    <div class="titulo__productora  p-5">
+                        <h2 class="text-center nombre__productora">@productora.NombreProductora</h2>
+                    </div>
+
+                    <div class="acciones__Serie d-flex justify-content-end p-2 mt-4" style="gap: 20px;">
+                        <form asp-controller="Productora">
+                                <a asp-controller="Productora" asp-action="Editar" asp-route-Id="@productora.Id" class="btn btn-primary ">Editar</a>
+                                <a asp-controller="Productora" asp-action="Eliminar" asp-route-Id="@productora.Id" class="btn btn-danger">Eliminar</a>
+                        </form>
+                       
+                    </div>
+
+
+
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+
+</main>

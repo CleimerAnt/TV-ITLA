@@ -1,0 +1,28 @@
+﻿@model Application.ViewModel.PostAndEditViewModel.ProductoraPostAnEditViewModel
+@{
+    ViewData["Title"] = "Create";
+
+    bool editMode = Model.Id == 0 ? false : true;
+}
+
+
+
+
+<section class="formulario d-flex justify-content-center" style="margin-bottom:300px ;">
+    <form class="formulario__serie" asp-controller="Productora" asp-action="@(editMode ? "Editar" : "Create")" method="post">
+        <h2 class="mb-3 font-weight-bold text-center">@(editMode ? "Editar Productora" : "Crear Productora")</h2>
+        <div class="form-group mb-3">
+            <label asp-for="NombreProductora" class="mb-1 font-weight-bold" for="">Nombre Productora</label>
+            <input asp-for="NombreProductora" type="text" class="form-control mb-3">
+            <span asp-validation-for="NombreProductora"></span>
+        </div>
+
+      
+
+        <div class="d-flex  justify-content-end align-items-end">
+            <a asp-controller="Productora" asp-action="Acciones" class="btn btn-secondary m-1 mt-3 font-weight-bold  w-25">Cancelar</a>
+            <button type="submit" class="btn btn-primary m-1 w-25 mt-3  font-weight-bold">Enviar</button>
+        </div>
+    </form>
+</section>
+

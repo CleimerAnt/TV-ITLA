@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./ITLA-TV/Dockerfile
+    container_name: itla-tv
+    ports:
+      - 80:5126
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__conexion=Server=db;Database=ITLA-TV;User Id=sa;Password=jkl,.123889u;TrustServerCertificate=True;MultipleActiveResultSets=true
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql_server_container
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=jkl,.123889u
+    volumes:
+      - sql_data:/var/opt/mssql
+
+volumes:
+  sql_data:

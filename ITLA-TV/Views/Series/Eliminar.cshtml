@@ -1,0 +1,17 @@
+﻿@model Application.ViewModel.PostAndEditViewModel.SeriesPostAndEditViewModel
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<form asp-controller="Series" asp-action="Eliminar" method="post" style="margin-bottom:500px ;">
+    <h2 class="text-white  fw-bold text-center">Desea Eliminar esta Serie?</h2>
+    <div style="gap: 20px;" class="d-flex justify-content-center align-content-between mt-3 ">
+        <input type="hidden" asp-for="Id" />
+        <button class="btn btn-danger " type="submit">Eliminar</button>
+        <a asp-controller="Series" class="btn btn-info text-white" asp-action="Acciones">Cancelar</a>
+    </div>
+       
+</form>
+
+
+

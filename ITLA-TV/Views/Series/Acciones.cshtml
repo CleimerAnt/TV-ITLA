@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Application.ViewModel.SeriesViewModel>
+@{
+    ViewData["Title"] = "Acciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <main class="container mt-5" style="margin-bottom:200px ;">
+        <div class="d-flex align-content-center p-3">
+            <a asp-controller="Series" asp-action="Create" class="btn btn-primary fw-bold">Crear Serie</a>
+        </div>
+    
+        <div class="container">
+            <div class="row g-4">
+            @foreach (var serie in Model)
+            {
+                <div class="col-3">
+                    <div class="serie serie__acciones">
+                        <img class="imagen__serie" src="@serie.ImagenPortada" alt="">
+                        <h3 class="text-center text-black fw-bold mt-2">@serie.NombreSerie</h3>
+                        <div class="acciones__Serie d-flex justify-content-end p-2 mt-4" style="gap: 10px;">
+                            <form asp-controller="Series">
+                                <a class="btn btn-primary" asp-controller="Series" asp-route-Id="@serie.Id" asp-action="Editar">Editar</a>
+                                <a class="btn btn-danger" asp-controller="Series" asp-route-Id="@serie.Id" asp-action="Eliminar">Eliminar</a>
+                            </form>
+                            
+                        </div>
+
+
+
+                    </div>
+                </div>
+            }
+
+            </div>
+        </div>
+
+
+    </main>
+
+                        

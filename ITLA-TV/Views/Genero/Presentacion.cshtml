@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Application.ViewModel.GenerosViewModel> 
+@{
+    ViewData["Title"] = "Presentacion";
+}
+
+<h1>Presentacion</h1>
+
+@foreach (var Genero in Model)
+{
+    <p>@Genero.NombreGenero</p>
+
+    <a asp-action="Editar" asp-controller="Genero" asp-route-Id="@Genero.Id">Editar</a>
+
+    <a asp-action="Eliminar" asp-controller="Genero" asp-route-Id="@Genero.Id">Eliminar</a>
+}
+
